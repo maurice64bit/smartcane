@@ -1,0 +1,326 @@
+/*************************************************************************
+ * Custom CSS for the Smart Cane project website
+ * (frame.css / controls.css are left untouched, per template guidance)
+ *************************************************************************/
+
+:root {
+  --cane-accent: #0e7c86;
+  --cane-accent-dark: #0a5a62;
+  --cane-warn: #d9822b;
+  --cane-ink: #1f2a2c;
+}
+
+/* ---------- Hero banner ---------- */
+.hero-banner {
+  background: linear-gradient(135deg, #102b30 0%, #0e7c86 55%, #14979f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.08) 0, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.10) 0, transparent 40%);
+  pointer-events: none;
+}
+
+.hero-banner h1 {
+  color: #ffffff;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 46px;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.5px;
+}
+
+.hero-tagline {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 19px;
+  max-width: 640px;
+  margin: 0 auto 22px auto;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.hero-pill {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-cane-primary {
+  background-color: #ffffff !important;
+  color: var(--cane-accent-dark) !important;
+  border: none !important;
+  font-weight: 700 !important;
+}
+
+.btn-cane-primary:hover {
+  background-color: #eafbfc !important;
+}
+
+.btn-cane-outline {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+}
+
+.btn-cane-outline:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* ---------- Section labels ---------- */
+.eyebrow {
+  display: inline-block;
+  color: var(--cane-accent-dark);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* ---------- Feature grid ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin: 18px 0 8px 0;
+}
+
+@media (max-width: 900px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 22px 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: rgba(14, 124, 134, 0.1);
+  color: var(--cane-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.feature-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: var(--cane-ink);
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4c4c4c;
+}
+
+/* ---------- Pipeline / how-it-works steps ---------- */
+.pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 22px 0;
+  flex-wrap: wrap;
+}
+
+.pipeline-step {
+  flex: 1 1 150px;
+  background: #f7fafa;
+  border: 1px solid #e2eeee;
+  border-radius: 8px;
+  padding: 16px 14px;
+  text-align: center;
+  margin: 6px;
+  min-width: 140px;
+}
+
+.pipeline-step .step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cane-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.pipeline-step div.step-label {
+  font-size: 14px;
+  color: var(--cane-ink);
+  line-height: 1.4;
+}
+
+.pipeline-arrow {
+  display: flex;
+  align-items: center;
+  color: #b7cfd1;
+  font-size: 18px;
+  padding: 0 2px;
+}
+
+@media (max-width: 700px) {
+  .pipeline-arrow {
+    display: none;
+  }
+}
+
+/* ---------- Cane diagram ---------- */
+.cane-diagram-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 4px 0;
+}
+
+.cane-diagram-wrap svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Priority / roadmap table tweaks ---------- */
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 5px;
+  background: var(--cane-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.priority-badge.badge-warn {
+  background: var(--cane-warn);
+}
+
+.priority-badge.badge-later {
+  background: #8a97a0;
+}
+
+/* ---------- Stat strip ---------- */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 6px 0 20px 0;
+}
+
+@media (max-width: 700px) {
+  .stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-box {
+  text-align: center;
+  padding: 16px 10px;
+  border-radius: 8px;
+  background: #f7fafa;
+  border: 1px solid #e2eeee;
+}
+
+.stat-box .stat-number {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cane-accent-dark);
+  display: block;
+}
+
+.stat-box .stat-label {
+  font-size: 12.5px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ---------- Checklist ---------- */
+.check-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.check-list li {
+  position: relative;
+  padding: 6px 0 6px 30px;
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+
+.check-list li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: var(--cane-accent);
+  position: absolute;
+  left: 0;
+  top: 6px;
+  font-size: 13px;
+}
+
+.gap-list li::before {
+  content: "\f071";
+  color: var(--cane-warn);
+}
+
+/* ---------- Menu logo tweak ---------- */
+.menu .logo a {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.menu .logo a i {
+  margin-right: 8px;
+  color: var(--cane-accent);
+}

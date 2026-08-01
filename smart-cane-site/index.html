@@ -1,0 +1,485 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Smart Cane — Assistive Mobility Device for the Blind</title>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An ESP32-based smart walking cane that gives blind and low-vision users obstacle warnings, haptic and audio feedback, and automatic fall alerts.">
+  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/frame.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/controls.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="css/custom.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/footer.js"></script>
+  <style>
+    .menu-index {
+      color: rgb(255, 255, 255) !important;
+      opacity: 1 !important;
+      font-weight: 700 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu-container"></div>
+
+  <div class="content-container">
+
+    <!-------------------------------------------------------------------------------------------->
+    <!-- Hero -->
+    <div class="banner hero-banner" style="padding: 70px 0 60px 0;">
+      <div class="banner-table flex-column">
+        <div class="flex-row">
+          <div class="flex-item flex-column" style="text-align:center;">
+            <div class="hero-badges">
+              <span class="hero-pill"><i class="fas fa-microchip"></i>&nbsp; ESP32 firmware</span>
+              <span class="hero-pill"><i class="fas fa-code-branch"></i>&nbsp; Open hardware</span>
+              <span class="hero-pill"><i class="fas fa-hand-holding-heart"></i>&nbsp; Assistive technology</span>
+            </div>
+            <h1>Smart Cane</h1>
+            <p class="hero-tagline" style="margin-left:auto; margin-right:auto;">
+              A low-cost walking cane that senses obstacles, guides with sound and vibration, and
+              calls for help automatically if its user falls.
+            </p>
+            <div class="hero-buttons">
+              <a href="#overview" class="custom-button btn-cane-primary">
+                <i class="fas fa-arrow-down"></i>&nbsp; See how it works
+              </a>
+              <a href="file/Smart_Cane_Technical_Report.docx" class="custom-button btn-cane-outline">
+                <i class="fas fa-file-alt"></i>&nbsp; Read the technical report
+              </a>
+              <a href="https://github.com/" target="_blank" class="custom-button btn-cane-outline">
+                <i class="fab fa-github"></i>&nbsp; View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Hero -->
+    <!-------------------------------------------------------------------------------------------->
+
+    <div class="content">
+      <div class="content-table flex-column">
+
+        <!-------------------------------------------------------------------------------------------->
+        <!-- Overview -->
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <span class="eyebrow" id="overview">Overview</span>
+            <h2 class="no-top-margin">A cane that watches the path ahead</h2>
+            <hr>
+            <p class="text">
+              Traditional white canes rely entirely on physical contact and sound reflection to reveal what's
+              nearby. This project augments that experience electronically: two ultrasonic sensors read the
+              space in front of the user at two different heights, a vibration motor and a buzzer translate
+              distance into feel and sound in real time, a small speaker module speaks out warnings as
+              obstacles get closer, and an onboard motion sensor watches for a fall &mdash; automatically
+              sending a Wi-Fi alert to a caregiver if the user goes down and doesn't get back up.
+            </p>
+            <p class="text">
+              Everything runs on a single ESP32 microcontroller, keeping the design affordable to build,
+              easy to modify, and realistic for student, hobbyist, and NGO-scale production.
+            </p>
+          </div>
+        </div>
+
+        <div class="stat-strip">
+          <div class="stat-box">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Ultrasonic Sensors</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Alert Zones (2m / 1m / 40cm)</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Voice Warning Tracks</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">1.5s</span>
+            <span class="stat-label">Fall Confirmation Window</span>
+          </div>
+        </div>
+        <!-- End Overview -->
+        <!-------------------------------------------------------------------------------------------->
+
+        <!-- Cane diagram -->
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <h2>What's built into the cane</h2>
+            <hr>
+            <p class="text">
+              Every sensor and output is mounted along the shaft so the electronics stay compact and the
+              cane still feels and balances like a normal mobility cane.
+            </p>
+          </div>
+        </div>
+        <div class="cane-diagram-wrap">
+          <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of the smart cane showing the control unit near the handle, the top ultrasonic sensor at chest height, and the bottom ultrasonic sensor and buzzer near the tip.">
+            <!-- shaft -->
+            <path d="M 210 40 C 250 120, 300 220, 330 340" fill="none" stroke="#5b6b6d" stroke-width="9" stroke-linecap="round"/>
+            <!-- handle -->
+            <path d="M 210 40 C 190 20, 160 20, 150 40 C 142 55, 155 68, 175 60" fill="none" stroke="#5b6b6d" stroke-width="9" stroke-linecap="round"/>
+
+            <!-- control unit box near handle -->
+            <rect x="150" y="70" width="18" height="26" rx="4" fill="#0e7c86"/>
+            <line x1="168" y1="82" x2="260" y2="60" stroke="#b7cfd1" stroke-width="2"/>
+            <circle cx="260" cy="60" r="3.5" fill="#0e7c86"/>
+            <text x="270" y="50" font-family="Open Sans, sans-serif" font-size="15" font-weight="700" fill="#1f2a2c">Control unit</text>
+            <text x="270" y="70" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">ESP32, MPU6050, DFPlayer Mini,</text>
+            <text x="270" y="86" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">speaker &amp; battery</text>
+
+            <!-- top ultrasonic -->
+            <circle cx="246" cy="150" r="7" fill="#d9822b"/>
+            <line x1="252" y1="150" x2="330" y2="140" stroke="#b7cfd1" stroke-width="2"/>
+            <circle cx="330" cy="140" r="3.5" fill="#d9822b"/>
+            <text x="340" y="132" font-family="Open Sans, sans-serif" font-size="15" font-weight="700" fill="#1f2a2c">Top ultrasonic sensor</text>
+            <text x="340" y="150" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">Chest / torso height —</text>
+            <text x="340" y="166" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">classifies "tall" obstacles</text>
+
+            <!-- vibration motor on grip -->
+            <circle cx="180" cy="52" r="7" fill="#0e7c86"/>
+            <line x1="174" y1="58" x2="110" y2="110" stroke="#b7cfd1" stroke-width="2"/>
+            <circle cx="110" cy="110" r="3.5" fill="#0e7c86"/>
+            <text x="10" y="100" font-family="Open Sans, sans-serif" font-size="15" font-weight="700" fill="#1f2a2c" text-anchor="start">Haptic motor</text>
+            <text x="10" y="118" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">Grip vibrates faster and</text>
+            <text x="10" y="134" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">stronger as objects get closer</text>
+
+            <!-- bottom ultrasonic + buzzer near tip -->
+            <circle cx="322" cy="300" r="7" fill="#d9822b"/>
+            <line x1="328" y1="298" x2="420" y2="270" stroke="#b7cfd1" stroke-width="2"/>
+            <circle cx="420" cy="270" r="3.5" fill="#d9822b"/>
+            <text x="430" y="255" font-family="Open Sans, sans-serif" font-size="15" font-weight="700" fill="#1f2a2c">Bottom ultrasonic sensor</text>
+            <text x="430" y="273" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">Ground / low-obstacle range,</text>
+            <text x="430" y="289" font-family="Open Sans, sans-serif" font-size="12.5" fill="#5c6a6c">paired with a guidance buzzer</text>
+
+            <!-- tip -->
+            <circle cx="330" cy="340" r="6" fill="#5b6b6d"/>
+          </svg>
+        </div>
+        <!-- End Cane diagram -->
+        <!-------------------------------------------------------------------------------------------->
+
+        <!-- How it works -->
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <span class="eyebrow" id="how-it-works">How It Works</span>
+            <h2 class="no-top-margin">Six systems, working together</h2>
+            <hr>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-ruler-combined"></i></div>
+            <h3>Dual-zone obstacle detection</h3>
+            <p>Two ultrasonic sensors mounted at different heights tell a low curb apart from a chest-height
+              obstacle, and scale their response as the user gets closer: 2&nbsp;m, 1&nbsp;m, then 40&nbsp;cm.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-wave-square"></i></div>
+            <h3>Adaptive haptic feedback</h3>
+            <p>A vibration motor in the grip pulses faster and stronger the closer an obstacle gets, giving an
+              instant, silent cue before any sound plays.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-volume-up"></i></div>
+            <h3>Spoken distance alerts</h3>
+            <p>A DFPlayer Mini speaks short warnings at each distance zone, queued so a new warning never cuts
+              off one that's already playing.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-bell"></i></div>
+            <h3>Guidance buzzer</h3>
+            <p>An onboard buzzer reinforces the voice and haptic cues near the tip of the cane, helping steer
+              the user around what's ahead once they've been warned.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3>Fall detection</h3>
+            <p>An MPU6050 motion sensor watches for a hard impact followed by a sustained change in tilt. If
+              that pattern holds for 1.5 seconds, the cane treats it as a confirmed fall.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-wifi"></i></div>
+            <h3>Emergency Wi-Fi alert</h3>
+            <p>Once a fall is confirmed, the cane plays an emergency voice alert and sends a webhook notification
+              over Wi-Fi, retrying automatically until it succeeds.</p>
+          </div>
+        </div>
+
+        <!-- Pipeline -->
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <h3 style="margin-top:26px;">A typical walk, step by step</h3>
+          </div>
+        </div>
+        <div class="pipeline">
+          <div class="pipeline-step">
+            <div class="step-index">1</div>
+            <div class="step-label">Sensors scan the path continuously</div>
+          </div>
+          <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step">
+            <div class="step-index">2</div>
+            <div class="step-label">Firmware classifies obstacle height &amp; distance</div>
+          </div>
+          <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step">
+            <div class="step-index">3</div>
+            <div class="step-label">Haptic + buzzer + voice respond in real time</div>
+          </div>
+          <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step">
+            <div class="step-index">4</div>
+            <div class="step-label">IMU watches motion in the background</div>
+          </div>
+          <div class="pipeline-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="pipeline-step">
+            <div class="step-index">5</div>
+            <div class="step-label">On a confirmed fall: alarm + Wi-Fi alert</div>
+          </div>
+        </div>
+        <!-- End How it works -->
+        <!-------------------------------------------------------------------------------------------->
+
+      </div>
+    </div>
+
+    <!-- Hardware banner -->
+    <div class="banner" style="background-color:#f7fafa; border-top:1px solid #e2eeee; border-bottom:1px solid #e2eeee;">
+      <div class="banner-table flex-column">
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <span class="eyebrow" id="hardware">Hardware</span>
+            <h2 class="add-top-margin-small">Bill of materials</h2>
+            <p class="text">
+              Six main components, all off-the-shelf and commonly available, connected to a single ESP32
+              development board.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="content-table flex-column">
+
+        <div class="custom-table-container center add-top-margin-small add-bottom-margin-large">
+          <table class="custom-table">
+            <thead>
+              <tr class="bg-color-gray">
+                <th>Component</th>
+                <th>Connection</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ultrasonic sensor (bottom)</td>
+                <td class="text-center">TRIG 12 / ECHO 13</td>
+                <td>Ground-level and low-obstacle range</td>
+              </tr>
+              <tr class="bg-color-light-gray">
+                <td>Ultrasonic sensor (top)</td>
+                <td class="text-center">TRIG 14 / ECHO 27</td>
+                <td>Chest / head-height range</td>
+              </tr>
+              <tr>
+                <td>Haptic vibration motor</td>
+                <td class="text-center">GPIO 18 (PWM)</td>
+                <td>Distance feedback in the grip</td>
+              </tr>
+              <tr class="bg-color-light-gray">
+                <td>Guidance buzzer</td>
+                <td class="text-center">Near cane tip</td>
+                <td>Audible steering cue near obstacles</td>
+              </tr>
+              <tr>
+                <td>DFPlayer Mini + speaker</td>
+                <td class="text-center">RX 16 / TX 17 / BUSY 19</td>
+                <td>Spoken distance and emergency warnings</td>
+              </tr>
+              <tr class="bg-color-light-gray">
+                <td>MPU6050 (accelerometer + gyro)</td>
+                <td class="text-center">I2C</td>
+                <td>Fall detection</td>
+              </tr>
+              <tr>
+                <td>ESP32 dev board</td>
+                <td class="text-center">&mdash;</td>
+                <td>Runs the firmware; Wi-Fi for alerts</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-------------------------------------------------------------------------------------------->
+        <!-- Challenges -->
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <span class="eyebrow" id="challenges">Behind the Build</span>
+            <h2 class="no-top-margin">Challenges we ran into</h2>
+            <hr>
+            <p class="text">
+              Building a wearable assistive device surfaces problems that don't show up until you're testing
+              on a real sidewalk. A few that shaped this project:
+            </p>
+          </div>
+        </div>
+        <div class="flex-row">
+          <div class="flex-item flex-item-stretch flex-column">
+            <ul class="check-list gap-list">
+              <li>Ultrasonic sensors are inconsistent against soft, angled, or reflective surfaces like
+                fabric and glass, so distance thresholds needed real-world tuning, not just bench testing.</li>
+              <li>Telling a genuine fall apart from setting the cane down hard or tapping the tip on a curb
+                took careful calibration of the impact and tilt thresholds.</li>
+              <li>Wi-Fi-based emergency alerts only work when the user is in range of a known network,
+                which doesn't hold once they're out and about.</li>
+              <li>Running two ultrasonic sensors, a motion sensor, an audio module, and Wi-Fi continuously
+                puts real pressure on battery life.</li>
+            </ul>
+          </div>
+          <div class="flex-item flex-item-stretch flex-column">
+            <ul class="check-list gap-list">
+              <li>Housing exposed sensors and a microSD-based audio module so they survive being tapped on
+                pavement and used outdoors is a mechanical challenge as much as an electronics one.</li>
+              <li>Timing voice, haptic, and buzzer feedback so nothing overlaps or lags behind a person
+                walking at a normal pace required balancing sensor polling against audio playback time.</li>
+              <li>Getting stable serial communication with the DFPlayer Mini is a common early hurdle &mdash;
+                power and wiring details matter more than they first appear to.</li>
+              <li>None of this replaces testing with actual blind or low-vision users and orientation-and-
+                mobility instructors, which remains the most valuable feedback loop.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- End Challenges -->
+        <!-------------------------------------------------------------------------------------------->
+
+        <!-- Roadmap -->
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <span class="eyebrow" id="roadmap">What's Next</span>
+            <h2 class="no-top-margin">Roadmap</h2>
+            <hr>
+            <p class="text">
+              Rough priority order for where the project goes from here.
+            </p>
+          </div>
+        </div>
+        <div class="custom-table-container center add-top-margin-small add-bottom-margin-large">
+          <table class="custom-table">
+            <thead>
+              <tr class="bg-color-gray">
+                <th class="text-center">Priority</th>
+                <th>Item</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center"><span class="priority-badge badge-warn">1</span></td>
+                <td>Downward-facing drop-off sensor</td>
+                <td>Closes the biggest gap in obstacle coverage — curbs, stairs, and holes</td>
+              </tr>
+              <tr class="bg-color-light-gray">
+                <td class="text-center"><span class="priority-badge badge-warn">2</span></td>
+                <td>GPS/location in the fall alert</td>
+                <td>A fall alert without a location is far less actionable for a caregiver</td>
+              </tr>
+              <tr>
+                <td class="text-center"><span class="priority-badge">3</span></td>
+                <td>Manual SOS / cancel button</td>
+                <td>Gives the user direct control, independent of sensor accuracy</td>
+              </tr>
+              <tr class="bg-color-light-gray">
+                <td class="text-center"><span class="priority-badge">4</span></td>
+                <td>Battery monitoring + low-battery voice warning</td>
+                <td>Prevents a safety device from failing silently mid-use</td>
+              </tr>
+              <tr>
+                <td class="text-center"><span class="priority-badge badge-later">5</span></td>
+                <td>Sensor filtering &amp; gyro-assisted fall confirmation</td>
+                <td>Fewer false positives and false negatives in both subsystems</td>
+              </tr>
+              <tr class="bg-color-light-gray">
+                <td class="text-center"><span class="priority-badge badge-later">6</span></td>
+                <td>Companion app, power management, OTA updates</td>
+                <td>Long-term polish and maintainability</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text text-center add-bottom-margin-large">
+          <a class="highlight-text" href="file/Smart_Cane_Technical_Report.docx">Read the full technical
+            report</a> for the detailed write-up, including security notes and firmware-level findings.
+        </p>
+        <!-- End Roadmap -->
+        <!-------------------------------------------------------------------------------------------->
+
+      </div>
+    </div>
+
+    <!-- Team banner -->
+    <div class="banner" style="background-color:#f7fafa; border-top:1px solid #e2eeee; border-bottom:1px solid #e2eeee;">
+      <div class="banner-table flex-column">
+        <div class="flex-row">
+          <div class="flex-item flex-column">
+            <span class="eyebrow" id="team">Team</span>
+            <h2 class="add-top-margin-small">Who's behind this</h2>
+            <p class="text">
+              Replace the placeholders below with your team's names, roles, and links.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="content-table flex-column">
+        <div class="gallery add-top-margin-small add-bottom-margin-large">
+          <div class="flex-column">
+            <div class="feature-icon" style="width:64px;height:64px;font-size:26px;margin:0 auto 10px auto;">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3 class="text-center">Your Name</h3>
+            <div class="text-center">Firmware &amp; Electronics</div>
+            <div class="text-center">
+              <a href="javascript:void(0)">Email</a> &nbsp;|&nbsp; <a href="javascript:void(0)">LinkedIn</a>
+            </div>
+          </div>
+          <div class="flex-column">
+            <div class="feature-icon" style="width:64px;height:64px;font-size:26px;margin:0 auto 10px auto;">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3 class="text-center">Teammate Name</h3>
+            <div class="text-center">Mechanical Design</div>
+            <div class="text-center">
+              <a href="javascript:void(0)">Email</a> &nbsp;|&nbsp; <a href="javascript:void(0)">LinkedIn</a>
+            </div>
+          </div>
+          <div class="flex-column">
+            <div class="feature-icon" style="width:64px;height:64px;font-size:26px;margin:0 auto 10px auto;">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3 class="text-center">Teammate Name</h3>
+            <div class="text-center">Testing &amp; Outreach</div>
+            <div class="text-center">
+              <a href="javascript:void(0)">Email</a> &nbsp;|&nbsp; <a href="javascript:void(0)">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-container"></div>
+</body>
+
+</html>
