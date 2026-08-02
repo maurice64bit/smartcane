@@ -514,10 +514,10 @@ body {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  grid-template-columns: 1fr;
   gap: 32px;
   align-items: stretch;
-  max-width: 1180px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
@@ -719,7 +719,7 @@ body {
 
 .overview-grid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr;
   gap: 32px;
   align-items: start;
 }
@@ -741,7 +741,7 @@ body {
 
 .feature-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1fr);
+  grid-template-columns: 1fr;
   gap: 32px;
   align-items: start;
 }
@@ -814,7 +814,7 @@ body {
 
 .pipeline {
   display: grid;
-  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  grid-template-columns: 1fr;
   gap: 18px;
   align-items: stretch;
 }
@@ -909,7 +909,7 @@ body {
 
 .section-content-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 30px;
   margin-top: 40px;
 }
@@ -941,7 +941,7 @@ body {
 
 .project-media {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 22px;
 }
 
