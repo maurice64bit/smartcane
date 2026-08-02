@@ -462,6 +462,12 @@
   color: var(--cane-accent);
 }
 
+.menu .menu-items > a.menu-index,
+.menu .menu-items > a:hover,
+.menu .menu-items > div:hover {
+  color: var(--accent) !important;
+}
+
 :root {
   --bg: #eef5f8;
   --surface: #ffffff;
@@ -538,14 +544,19 @@ body {
   border-radius: 999px;
 }
 
-.hero-banner h1,
-.section-title h2,
-.section-header h2 {
+.hero-banner h1 {
   margin: 0;
   color: #ffffff;
   font-size: clamp(2.4rem, 4vw, 4.2rem);
   line-height: 1.05;
   max-width: 14ch;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.5rem, 2.2vw, 2.4rem);
+  line-height: 1.12;
 }
 
 .hero-tagline {
@@ -555,37 +566,41 @@ body {
   line-height: 1.8;
 }
 
-.hero-badges {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.menu-container {
+  z-index: 2;
+  position: relative;
+  width: 100%;
+  background-color: #333333;
+  min-width: 300px;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.32), 0 0px 10px rgba(0, 0, 0, 0.23);
 }
 
-.hero-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 0.92rem;
+.menu .menu-table {
+  padding: 12px 20px;
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+.menu .logo a {
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.hero-panel {
-  display: grid;
-  gap: 24px;
-  align-content: start;
+.menu .menu-items > a,
+.menu .menu-items > div {
+  color: rgba(255, 255, 255, 0.85);
+  margin-right: 20px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
-.hero-card,
-.stat-strip.highlight-strip,
+.menu .menu-items > a:hover,
+.menu .menu-items > div:hover {
+  color: #ffffff;
+}
+
+.menu .menu-items > a.menu-index {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+}
 .feature-card,
 .project-media-card,
 .team-card,
@@ -946,29 +961,6 @@ body {
   padding: 16px 18px;
   color: var(--text);
   font-weight: 700;
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.team-card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: center;
-}
-
-.team-card h3 {
-  margin: 0;
-  padding: 18px 16px 20px;
-  font-size: 1rem;
-  color: var(--text);
-  line-height: 1.4;
-  text-align: center;
-  background: linear-gradient(180deg, #ffffff 0%, #f2fbfe 100%);
 }
 
 @media (max-width: 1100px) {
