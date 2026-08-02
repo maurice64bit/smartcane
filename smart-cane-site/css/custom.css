@@ -226,6 +226,45 @@
 }
 
 /* ---------- Project media and team ---------- */
+.premium-team-banner {
+  position: relative;
+  margin: 0 auto 24px;
+  padding: 36px 32px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0f4c5c 0%, #117585 45%, #1ca6b8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 50px rgba(15, 76, 92, 0.18);
+  overflow: hidden;
+}
+
+.premium-team-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.16), transparent 45%, rgba(255, 255, 255, 0.08));
+  pointer-events: none;
+}
+
+.premium-team-banner .eyebrow {
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.premium-team-title {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.16);
+}
+
+.premium-team-text {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.03rem;
+  max-width: 720px;
+  line-height: 1.7;
+}
+
 .project-media {
   display: grid;
   grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
@@ -240,8 +279,16 @@
   overflow: hidden;
   background: #fff;
   border: 1px solid #e2eeee;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(16, 43, 48, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(16, 43, 48, 0.08);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.project-media-card:hover,
+.team-card:hover {
+  transform: translateY(-6px);
+  border-color: #8ed5da;
+  box-shadow: 0 16px 32px rgba(16, 43, 48, 0.14);
 }
 
 .project-media-card img,
@@ -289,11 +336,13 @@
 .team-card h3 {
   min-height: 52px;
   margin: 0;
-  padding: 12px 10px;
-  color: var(--cane-ink);
+  padding: 14px 12px;
+  color: #173b45;
   font-size: 16px;
   line-height: 1.35;
   text-align: center;
+  font-weight: 700;
+  background: linear-gradient(180deg, #ffffff 0%, #f6fcfe 100%);
 }
 
 @media (max-width: 900px) {
