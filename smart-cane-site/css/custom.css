@@ -225,6 +225,94 @@
   height: auto;
 }
 
+/* ---------- Project media and team ---------- */
+.project-media {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  margin-top: 22px;
+}
+
+.project-media-card,
+.team-card {
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e2eeee;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(16, 43, 48, 0.06);
+}
+
+.project-media-card img,
+.project-media-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #102b30;
+}
+
+.project-media-card img {
+  object-fit: contain;
+}
+
+.cane-photo-card img {
+  height: auto;
+  aspect-ratio: auto;
+  background: transparent;
+}
+
+.project-media-card video {
+  object-fit: contain;
+}
+
+.project-media-card figcaption {
+  padding: 12px 15px;
+  color: var(--cane-ink);
+  font-weight: 700;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.team-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.team-card h3 {
+  min-height: 52px;
+  margin: 0;
+  padding: 12px 10px;
+  color: var(--cane-ink);
+  font-size: 16px;
+  line-height: 1.35;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .project-media,
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-media {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Priority / roadmap table tweaks ---------- */
 .priority-badge {
   display: inline-flex;
